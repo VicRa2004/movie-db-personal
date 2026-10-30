@@ -1,5 +1,10 @@
-import { drizzle } from "drizzle-orm/node-postgres";
+import { Kysely, PostgresDialect } from "kysely";
+import { Pool } from "pg";
+import type { Database } from "./types";
 
-import { relations } from "./relations";
-
-export const db = drizzle(process.env.DATABASE_URL!, { relations });
+export const db = new Kysely<Database>({
+  dialect: new PostgresDialect({
+    pool: new Pool({ connectionString: process.env.DATABASE_URL }),
+  }),
+  log: ["query"],
+});
