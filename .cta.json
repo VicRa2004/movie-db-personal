@@ -1,0 +1,29 @@
+{
+  "bundler": "vite",
+  "projectName": "movie-db-personal",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "pnpm",
+  "includeExamples": false,
+  "tailwind": true,
+  "projectPreset": "default",
+  "routerOnly": false,
+  "addOnOptions": {
+    "drizzle": {
+      "database": "postgresql"
+    }
+  },
+  "git": true,
+  "install": true,
+  "intent": true,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "compiler",
+    "drizzle",
+    "form",
+    "shadcn",
+    "tanstack-query"
+  ]
+}
