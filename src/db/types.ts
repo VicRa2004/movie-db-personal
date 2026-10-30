@@ -4,19 +4,19 @@ import type {
   Selectable,
   Insertable,
   Updateable,
-} from "kysely";
+} from 'kysely'
 
 export interface UserTable {
-  id: Generated<number>;
-  email: string;
-  nombre: string;
-  created_at: ColumnType<Date, string | undefined, never>;
+  id: Generated<number>
+  email: string
+  nombre: string
+  created_at: ColumnType<Date, string | undefined, never>
 }
 
 export interface Database {
-  users: UserTable; // la llave = nombre real de la tabla
+  users: UserTable // la llave = nombre real de la tabla
 }
 
-export type User = Selectable<UserTable>;
-export type NewUser = Insertable<UserTable>;
-export type UserUpdate = Updateable<UserTable>;
+export type User = Selectable<UserTable>
+export type NewUser = Insertable<UserTable>
+export type UserUpdate = Updateable<UserTable>
