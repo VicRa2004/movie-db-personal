@@ -1,11 +1,11 @@
-import type { NewUser, UserUpdate } from '#/db/types.ts'
 import { db } from '@/db'
+import type { UserCreate, UserUpdate } from './users.types'
 
 // Funciones - CRUD
 export const findUsers = async () => {
   const usuarios = await db
     .selectFrom('users')
-    .select(['id', 'nombre', 'email', 'users.created_at'])
+    .select(['id', 'nombre', 'email', 'password', 'created_at'])
     .execute()
 
   return usuarios
@@ -14,7 +14,7 @@ export const findUsers = async () => {
 export const findUserById = async (id: number) => {
   const [usuario] = await db
     .selectFrom('users')
-    .select(['id', 'nombre', 'email', 'users.created_at'])
+    .select(['id', 'nombre', 'email', 'password', 'created_at'])
     .where('id', '=', id)
     .execute()
 
@@ -24,14 +24,14 @@ export const findUserById = async (id: number) => {
 export const findUsuarioByEmail = async (email: string) => {
   const [usuario] = await db
     .selectFrom('users')
-    .select(['id', 'nombre', 'email', 'users.created_at'])
+    .select(['id', 'nombre', 'email', 'password', 'users.created_at'])
     .where('email', '=', email)
     .execute()
 
   return usuario
 }
 
-export const createUser = async (data: NewUser) => {
+export const createUser = async (data: UserCreate) => {
   const nuevo = await db
     .insertInto('users')
     .values(data)
