@@ -3,70 +3,71 @@
  * Please do not edit it manually.
  */
 
-import type { ColumnType } from "kysely";
+import type { ColumnType } from 'kysely'
 
-export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
-  ? ColumnType<S, I | undefined, U>
-  : ColumnType<T, T | undefined, T>;
+export type Generated<T> =
+  T extends ColumnType<infer S, infer I, infer U>
+    ? ColumnType<S, I | undefined, U>
+    : ColumnType<T, T | undefined, T>
 
-export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
 export interface HistorialPeliculas {
-  calificacion: Generated<number>;
-  created_at: Generated<Timestamp>;
-  id: Generated<number>;
-  id_peliculas: number;
-  id_user: number;
-  lugar: string;
-  notas: string | null;
+  calificacion: Generated<number>
+  created_at: Generated<Timestamp>
+  id: Generated<number>
+  id_peliculas: number
+  id_user: number
+  lugar: string
+  notas: string | null
 }
 
 export interface Peliculas {
-  "año_estreno": Timestamp;
-  created_at: Generated<Timestamp>;
-  duracion: number;
-  generos: string;
-  id: Generated<number>;
-  identificador_api: string;
-  poster_url: string;
-  titulo: string;
+  año_estreno: Timestamp
+  created_at: Generated<Timestamp>
+  duracion: number
+  generos: string
+  id: Generated<number>
+  identificador_api: string
+  poster_url: string
+  titulo: string
 }
 
 export interface PeliculasFavoritas {
-  created_at: Generated<Timestamp>;
-  id: Generated<number>;
-  id_historial_pelicula: number;
+  created_at: Generated<Timestamp>
+  id: Generated<number>
+  id_historial_pelicula: number
 }
 
 export interface PeliculasGuardadas {
-  created_at: Generated<Timestamp>;
-  id: Generated<number>;
-  id_pelicula: number;
-  id_user: number;
+  created_at: Generated<Timestamp>
+  id: Generated<number>
+  id_pelicula: number
+  id_user: number
 }
 
 export interface PeliculasReviews {
-  created_at: Generated<Timestamp>;
-  estado: Generated<string>;
-  id: Generated<number>;
-  id_historial_pelicula: number;
-  review_texto: string;
-  spoilers: Generated<string>;
+  created_at: Generated<Timestamp>
+  estado: Generated<string>
+  id: Generated<number>
+  id_historial_pelicula: number
+  review_texto: string
+  spoilers: Generated<string>
 }
 
 export interface Users {
-  created_at: Generated<Timestamp>;
-  email: string;
-  id: Generated<number>;
-  nombre: string;
-  password: string;
+  created_at: Generated<Timestamp>
+  email: string
+  id: Generated<number>
+  nombre: string
+  password: string
 }
 
 export interface DB {
-  historial_peliculas: HistorialPeliculas;
-  peliculas: Peliculas;
-  peliculas_favoritas: PeliculasFavoritas;
-  peliculas_guardadas: PeliculasGuardadas;
-  peliculas_reviews: PeliculasReviews;
-  users: Users;
+  historial_peliculas: HistorialPeliculas
+  peliculas: Peliculas
+  peliculas_favoritas: PeliculasFavoritas
+  peliculas_guardadas: PeliculasGuardadas
+  peliculas_reviews: PeliculasReviews
+  users: Users
 }
