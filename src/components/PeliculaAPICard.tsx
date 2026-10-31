@@ -26,10 +26,14 @@ export function PeliculaAPICard({ pelicula }: PeliculasAPIProps) {
       />
       <CardHeader>
         <CardAction>
-          <Badge variant="ghost">{pelicula.voteAverage}</Badge>
+          <Badge className="bg-primary text-white" variant="ghost">
+            {pelicula.voteAverage}
+          </Badge>
         </CardAction>
         <CardTitle>{pelicula.titulo}</CardTitle>
-        <CardDescription>{pelicula.descripcion}</CardDescription>
+        <CardDescription className="line-clamp-3">
+          {pelicula.descripcion}
+        </CardDescription>
       </CardHeader>
       <CardFooter>
         <Button className="w-full">Ver mas</Button>

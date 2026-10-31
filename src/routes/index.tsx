@@ -4,11 +4,11 @@ import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
   component: Home,
-  loader: () => getTendenciasFn(),
+  loader: () => getTendenciasFn({ data: { pagina: 1, tamanoPagina: 9 } }),
 })
 
 function Home() {
-  const { peliculas } = Route.useLoaderData()
+  const { resultados } = Route.useLoaderData()
 
   return (
     <div className="p-8">
@@ -18,7 +18,7 @@ function Home() {
       <p className="mt-4 text-lg">Estos son los ultimos estrenos disponibles</p>
 
       <main className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5 border">
-        {peliculas.map((pelicula) => (
+        {resultados.map((pelicula) => (
           <PeliculaAPICard pelicula={pelicula} />
         ))}
       </main>
