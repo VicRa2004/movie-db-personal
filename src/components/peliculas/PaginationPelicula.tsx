@@ -61,11 +61,13 @@ export const PaginationPelicula = ({
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            onClick={() => (page != 1 ? atras() : undefined)}
-          />
-        </PaginationItem>
+        {page != 1 && (
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => (page != 1 ? atras() : undefined)}
+            />
+          </PaginationItem>
+        )}
         {numerosPaginas.map((v, i) => (
           <PaginationItem
             key={i}
@@ -74,11 +76,14 @@ export const PaginationPelicula = ({
             <PaginationLink href="#">{v}</PaginationLink>
           </PaginationItem>
         ))}
-        <PaginationItem>
-          <PaginationNext
-            onClick={() => (page != totalPages ? siguiente() : undefined)}
-          />
-        </PaginationItem>
+
+        {totalPages != page && (
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => (page != totalPages ? siguiente() : undefined)}
+            />
+          </PaginationItem>
+        )}
       </PaginationContent>
     </Pagination>
   )
