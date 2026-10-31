@@ -1,5 +1,19 @@
-import type { Users } from '@/db/types'
+export interface User {
+  id: number
+  nombre: string
+  email: string
+  password: string
+  createdAt: Date
+}
 
-export type UserCreate = Omit<Users, 'id' | 'created_at'>
+export interface UserCreate {
+  nombre: string
+  email: string
+  password: string
+}
 
-export type UserUpdate = Partial<UserCreate>
+export interface UserUpdate {
+  id: number
+  nombre: string
+  email: string
+}

@@ -1,5 +1,9 @@
 import { db } from '@/db'
-import type { UserCreate, UserUpdate } from './users.types'
+import type { Users } from '@/db/types'
+
+type UserCreate = Omit<Users, 'id' | 'created_at'>
+
+type UserUpdate = Partial<UserCreate>
 
 // Funciones - CRUD
 export const findUsers = async () => {
@@ -21,7 +25,7 @@ export const findUserById = async (id: number) => {
   return usuario
 }
 
-export const findUsuarioByEmail = async (email: string) => {
+export const findUserByEmail = async (email: string) => {
   const [usuario] = await db
     .selectFrom('users')
     .select(['id', 'nombre', 'email', 'password', 'users.created_at'])
@@ -31,7 +35,7 @@ export const findUsuarioByEmail = async (email: string) => {
   return usuario
 }
 
-export const createUser = async (data: UserCreate) => {
+export const insertUser = async (data: UserCreate) => {
   const nuevo = await db
     .insertInto('users')
     .values(data)
