@@ -22,7 +22,7 @@ const paginacionSchema = z
   .object({
     pagina: z.number().min(1).default(1),
     tamanoPagina: z.number().min(1).max(20).default(10), // Puedes pasar 9 o 10
-    maxPaginas: z.number().min(1).max(500).default(10),
+    maxPaginas: z.number().min(1).max(500).default(20),
   })
   .optional()
 
