@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as PeliculasIndexRouteImport } from './routes/peliculas/index'
+import { Route as PeliculasPeliculaIdRouteImport } from './routes/peliculas/$peliculaId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,50 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PeliculasIndexRoute = PeliculasIndexRouteImport.update({
+  id: '/peliculas/',
+  path: '/peliculas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PeliculasPeliculaIdRoute = PeliculasPeliculaIdRouteImport.update({
+  id: '/peliculas/$peliculaId',
+  path: '/peliculas/$peliculaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
+  '/peliculas/$peliculaId': typeof PeliculasPeliculaIdRoute
+  '/peliculas/': typeof PeliculasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
+  '/peliculas/$peliculaId': typeof PeliculasPeliculaIdRoute
+  '/peliculas': typeof PeliculasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
+  '/peliculas/$peliculaId': typeof PeliculasPeliculaIdRoute
+  '/peliculas/': typeof PeliculasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/login'
+  fullPaths: '/' | '/auth/login' | '/peliculas/$peliculaId' | '/peliculas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/login'
-  id: '__root__' | '/' | '/auth/login'
+  to: '/' | '/auth/login' | '/peliculas/$peliculaId' | '/peliculas'
+  id:
+    '__root__' | '/' | '/auth/login' | '/peliculas/$peliculaId' | '/peliculas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthLoginRoute: typeof AuthLoginRoute
+  PeliculasPeliculaIdRoute: typeof PeliculasPeliculaIdRoute
+  PeliculasIndexRoute: typeof PeliculasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +86,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/peliculas/': {
+      id: '/peliculas/'
+      path: '/peliculas'
+      fullPath: '/peliculas/'
+      preLoaderRoute: typeof PeliculasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/peliculas/$peliculaId': {
+      id: '/peliculas/$peliculaId'
+      path: '/peliculas/$peliculaId'
+      fullPath: '/peliculas/$peliculaId'
+      preLoaderRoute: typeof PeliculasPeliculaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthLoginRoute: AuthLoginRoute,
+  PeliculasPeliculaIdRoute: PeliculasPeliculaIdRoute,
+  PeliculasIndexRoute: PeliculasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
