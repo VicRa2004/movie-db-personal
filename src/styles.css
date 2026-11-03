@@ -129,3 +129,11 @@
     @apply font-sans;
   }
 }
+
+.yt {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}

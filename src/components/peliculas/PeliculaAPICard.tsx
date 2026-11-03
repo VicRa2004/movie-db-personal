@@ -10,12 +10,24 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { useNavigate } from '@tanstack/react-router'
 
 interface PeliculasAPIProps {
   pelicula: PeliculaAPI
 }
 
 export function PeliculaAPICard({ pelicula }: PeliculasAPIProps) {
+  const navigate = useNavigate()
+
+  const irAPelicula = (id: number) => {
+    navigate({
+      to: '/peliculas/$peliculaId',
+      params: {
+        peliculaId: id,
+      },
+    })
+  }
+
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
@@ -36,7 +48,9 @@ export function PeliculaAPICard({ pelicula }: PeliculasAPIProps) {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button className="w-full">Ver mas</Button>
+        <Button onClick={() => irAPelicula(pelicula.id)} className="w-full">
+          Ver mas
+        </Button>
       </CardFooter>
     </Card>
   )
