@@ -14,7 +14,7 @@ import {
  */
 function calcularPaginacion(pagina: number, totalPaginas: number) {
   // Cuando un elemento tiene menos de 5, comienza en el 1
-  if ([1, 2, 2, 3, 4, 5].includes(pagina)) {
+  if ([1, 2, 3].includes(pagina)) {
     return {
       inicio: 1,
       total: totalPaginas > 5 ? 5 : totalPaginas,
@@ -42,13 +42,15 @@ interface PaginationPeliculaProps {
   totalPages: number
   siguiente: () => void
   atras: () => void
+  irAPagina: (page: number) => void
 }
 
-export const PaginationPelicula = ({
+export const Paginacion = ({
   page = 1,
   totalPages,
   siguiente,
   atras,
+  irAPagina,
 }: PaginationPeliculaProps) => {
   if (totalPages == 0) return null
 
@@ -73,7 +75,7 @@ export const PaginationPelicula = ({
             key={i}
             className={v == page ? 'bg-primary rounded-full text-white' : ''}
           >
-            <PaginationLink href="#">{v}</PaginationLink>
+            <PaginationLink onClick={() => irAPagina(v)}>{v}</PaginationLink>
           </PaginationItem>
         ))}
 

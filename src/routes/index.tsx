@@ -1,4 +1,4 @@
-import { PaginationPelicula } from '#/components/peliculas/PaginationPelicula.tsx'
+import { Paginacion } from '#/components/Paginacion'
 import { PeliculaAPICard } from '#/components/peliculas/PeliculaAPICard.tsx'
 import { getTendenciasFn } from '#/features/peliculas_api/peliculas.api.functions.ts'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
@@ -37,6 +37,13 @@ function Home() {
     })
   }
 
+  const irAPagina = (page: number) => {
+    navigate({
+      to: '/',
+      search: { page },
+    })
+  }
+
   return (
     <div className="p-8">
       <h1 className="text-4xl text-primary font-bold">
@@ -46,15 +53,16 @@ function Home() {
 
       <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
         {resultados.map((pelicula) => (
-          <PeliculaAPICard pelicula={pelicula} />
+          <PeliculaAPICard key={pelicula.id} pelicula={pelicula} />
         ))}
 
         <section className="sm:col-span-2 lg:col-span-3">
-          <PaginationPelicula
+          <Paginacion
             siguiente={siguiente}
             atras={atras}
             page={pagina}
             totalPages={totalPaginas}
+            irAPagina={irAPagina}
           />
         </section>
       </main>
